@@ -51,3 +51,32 @@ def isAllThreeDiagonal() -> tuple:
     elif (leftDiagonal == ['O']*3) or (rightDiagonal == ['O']*3):
         return True, 'Игрок2 выиграл!'
     return False, ''
+
+
+def isDraw() -> tuple:
+    countOfMovesMade = 0
+    for row in positions:
+        for item in row:
+            if item != ' ':
+                countOfMovesMade += 1
+
+    if countOfMovesMade == 9:
+        return True
+    return False
+
+
+
+def isGameOver() -> tuple:
+    if isAllThreeInRow()[0]:
+        return isAllThreeInRow()
+
+    elif isAllThreeInColumn()[0]:
+        return isAllThreeInColumn()
+
+    elif isAllThreeDiagonal()[0]:
+        return isAllThreeDiagonal()
+
+    elif isDraw():
+        return True, 'Ничья!'
+    else:
+        return False, ''
