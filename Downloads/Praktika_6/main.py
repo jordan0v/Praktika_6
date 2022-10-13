@@ -80,3 +80,29 @@ def isGameOver() -> tuple:
         return True, 'Ничья!'
     else:
         return False, ''
+
+
+def isValidMove(row: int, column: int) -> bool:
+    try:
+        if positions[row][column] != ' ':
+            return False
+        return True
+    except IndexError:
+        return False
+
+
+
+def makeMove(row: int, column: int, mark: str) -> None:
+    positions[row][column] = mark
+
+
+
+def takeInput(player: str) -> tuple:
+    move = input(f'{player} введите свой ход: ')
+    row, column = [int(i) for i in move.split(',')]
+    return row, column
+
+
+def generateBoard(x: list) -> None:
+    board = f' {x[0][0]} | {x[0][1]} | {x[0][2]} \n---|---|---\n {x[1][0]} | {x[1][1]} | {x[1][2]} \n---|---|---\n {x[2][0]} | {x[2][1]} | {x[2][2]} '
+    print(board)
