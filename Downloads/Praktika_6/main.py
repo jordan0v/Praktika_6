@@ -106,3 +106,37 @@ def takeInput(player: str) -> tuple:
 def generateBoard(x: list) -> None:
     board = f' {x[0][0]} | {x[0][1]} | {x[0][2]} \n---|---|---\n {x[1][0]} | {x[1][1]} | {x[1][2]} \n---|---|---\n {x[2][0]} | {x[2][1]} | {x[2][2]} '
     print(board)
+
+def main() -> None:
+    print(welcomeMessage)
+    generateBoard(positions)
+    players = {'X': 'Игрок1', 'O': 'Игрок2'}
+    moves = 0
+    while not isGameOver()[0]:
+
+        if moves % 2 == 0:
+            mark = 'X'
+        else:
+            mark = 'O'
+
+        player = players[mark]
+
+        try:
+            row, column = takeInput(player)
+        except ValueError:
+            print('Неправильный ввод, попробуйте ещё')
+            continue
+
+        if not isValidMove(row, column):
+            print('Недоступный ход, попробуйте снова')
+            continue
+
+        makeMove(row, column, mark)
+        generateBoard(positions)
+        moves += 1
+    else:
+        print(isGameOver()[1])
+
+
+if __name__ == "__main__":
+    main()
